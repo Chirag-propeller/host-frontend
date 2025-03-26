@@ -1,6 +1,6 @@
 import { useVoiceAssistant, BarVisualizer, VoiceAssistantControlBar, useTrackTranscription, useLocalParticipant } from "@livekit/components-react";
 import {Track} from "livekit-client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from 'react'
 
 const Message = ({type, text}: {type: string, text: string}) => {
@@ -21,6 +21,7 @@ const Message = ({type, text}: {type: string, text: string}) => {
 }
 
 const SimpleVoiceAssistance = () => {
+    const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const {state, audioTrack, agentTranscriptions} = useVoiceAssistant()
   const localParticipant = useLocalParticipant();
   const {segments: userTranscript} = useTrackTranscription(
@@ -49,10 +50,24 @@ const SimpleVoiceAssistance = () => {
     setMessages(allMessages);
   }, [agentTranscriptions, userTranscript])
 
-
+  useEffect(() => {
+    if (!messagesContainerRef.current) return;
+  
+    const container = messagesContainerRef.current;
+    const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 10; // Small margin for accuracy
+  
+    if (isAtBottom) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+  
   
   return (
     <div className="flex flex-col justify-between w-full ">
+        
       {/* <div>
         <BarVisualizer 
           state={state}
@@ -60,7 +75,7 @@ const SimpleVoiceAssistance = () => {
           trackRef={audioTrack}
         />
       </div> */}
-      <div className="overflow-hidden overflow-y-auto">
+      <div className="overflow-hidden overflow-y-auto ref={messagesContainerRef}"> hi
         {
           messages.map((message, index) => (
             <Message 

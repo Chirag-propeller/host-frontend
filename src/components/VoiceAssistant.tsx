@@ -13,9 +13,14 @@ import '@livekit/components-styles';
 
 import { useEffect, useState } from 'react';
 import { Track } from 'livekit-client';
-import SimpleVoiceAssistance from './SimpleVoiceAssistance';
+// import SimpleVoiceAssistance from './SimpleVoiceAssistance';
+import SimpleVoiceAssistance from './SimpleVoiceAssistance2';
 
-const VoiceAssistant = () =>  {
+interface VoiceAssistantProps {
+  setShowVoiceAssistant: (show: boolean) => void;
+}
+
+const VoiceAssistant = ({ setShowVoiceAssistant }: VoiceAssistantProps) =>  {
   // TODO: get user input for room and name
   const room = 'quickstart-room';
   const name = 'quickstart-user';
@@ -23,12 +28,12 @@ const VoiceAssistant = () =>  {
   return (
     <div className='h-[90%] border-1 border-solid border-gray-500 rounded-sm m-1 p-2 bg-white w-full'>
     <LiveKitRoom
-      serverUrl="wss://test-app-ne6dttu8.livekit.cloud"
-      token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDMwMzU4MzIsImlzcyI6IkFQSVB2Y1hMNkZSV0FKOCIsIm5iZiI6MTc0MjAzNTgzMiwic3ViIjoiMTAiLCJ2aWRlbyI6eyJjYW5QdWJsaXNoIjp0cnVlLCJjYW5QdWJsaXNoRGF0YSI6dHJ1ZSwiY2FuU3Vic2NyaWJlIjp0cnVlLCJyb29tIjoiQ2hpcmFnIiwicm9vbUpvaW4iOnRydWV9fQ.y0ZAR3PC7CYSd7yEs3Pc4jDanTSKTL9CmawA7ySmaaY"
+      serverUrl="wss://new-for-frontend-testing-1p7wht22.livekit.cloud"
+      token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDMxODUxMTEsImlzcyI6IkFQSThzeW5iSFhKdk51ViIsIm5iZiI6MTc0MjI4NTExMSwic3ViIjoiMTAiLCJ2aWRlbyI6eyJjYW5QdWJsaXNoIjp0cnVlLCJjYW5QdWJsaXNoRGF0YSI6dHJ1ZSwiY2FuU3Vic2NyaWJlIjp0cnVlLCJyb29tIjoiQ2hpcmFnIiwicm9vbUpvaW4iOnRydWV9fQ.mlEhPJTe6TBlHrSud93YkdBhfuNfD49vSFPZhXsnNTA"
       video={false}
       connect={true}
       audio={true}
-      // onDisconnected={() => }
+      onDisconnected={() => setShowVoiceAssistant(false)}
       data-lk-theme="default"
       className='flex h-12 justify-center'
       style={{ 
