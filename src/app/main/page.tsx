@@ -35,7 +35,8 @@ const Main = () => {
   // "livekitwebapp-abddetfvdfg2gaar.eastus2-01.azurewebsites.net"
   // const url = "https://livekitwebapp-abddetfvdfg2gaar.eastus2-01.azurewebsites.net"
   // const url = "http://20.55.232.46:8000"  
-  const url = "http://20.55.238.13:8000"
+  // const url = "http://20.55.238.13:8000"
+  const url = "https://frontend-dbg6gvbdeqd0bjf7.z03.azurefd.net"
   // const url = "http://localhost:8000"
   const handleSubmit = async () => {
     try {
